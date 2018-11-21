@@ -152,7 +152,7 @@ int main() {
 }
 
 
-void playfairEncript(char ch1, char ch2, char key[MX][MX]) {  
+void playfairEncrypt(char ch1, char ch2, char key[MX][MX]) {  
     int i, j, w, x, y, z;  
     
     
@@ -180,7 +180,7 @@ void playfairEncript(char ch1, char ch2, char key[MX][MX]) {
     }    
 }  
 
-void playfairDecript(char ch1, char ch2, char key[MX][MX]) {  
+void playfairDecrypt(char ch1, char ch2, char key[MX][MX]) {  
     int i, j, w, x, y, z;  
     
     
@@ -234,11 +234,9 @@ int removerepeated(int size,char a[])
 return(size);
 }
 
-void encryptPlayfair(char text[1000], char key[100]) {
+void encryptPlayfair(char text[1000], char keystr[100]) {
 	int i, j, k = 0, l, m = 0, n;  
-    char key[MX][MX], keyminus[25], keystr[10], str[25] = {  
-        0  
-    };  
+    char key[MX][MX], keyminus[100];
     char alpa[26] = {  
         'A',  
         'B',  
@@ -293,25 +291,23 @@ void encryptPlayfair(char text[1000], char key[100]) {
         }    
     }  
 	
-    for (i = 0; i < strlen(str); i++) {  
-        if (str[i] == 'J') str[i] = 'I';  
-        if (str[i + 1] == '\0') playfairEncript(str[i], 'X', key);  
+    for (i = 0; i < strlen(text); i++) {  
+        if (text[i] == 'J') text[i] = 'I';  
+        if (text[i + 1] == '\0') playfairEncrypt(text[i], 'X', key);  
         else {  
-            if (str[i + 1] == 'J') str[i + 1] = 'I';  
-            if (str[i] == str[i + 1]) playfairEncript(str[i], 'X', key);  
+            if (text[i + 1] == 'J') text[i + 1] = 'I';  
+            if (text[i] == text[i + 1]) playfairEncrypt(text[i], 'X', key);  
             else {  
-                playfairEncript(str[i], str[i + 1], key);  
+                playfairEncrypt(text[i], text[i + 1], key);  
                 i++;  
             }  
         }  
     }
 }
 
-void decryptPlayfair(char text[100], char key[100]) {
+void decryptPlayfair(char text[1000], char keystr[100]) {
 	int i, j, k = 0, l, m = 0, n;  
-    char key[MX][MX], keyminus[25], keystr[10], str[25] = {  
-        0  
-    };  
+    char key[MX][MX], keyminus[100];
     char alpa[26] = {  
         'A',  
         'B',  
@@ -366,14 +362,14 @@ void decryptPlayfair(char text[100], char key[100]) {
         }    
     }  
 	
-    for (i = 0; i < strlen(str); i++) {  
-        if (str[i] == 'J') str[i] = 'I';  
-        if (str[i + 1] == '\0') playfairDecript(str[i], 'X', key);  
+    for (i = 0; i < strlen(text); i++) {  
+        if (text[i] == 'J') text[i] = 'I';  
+        if (text[i + 1] == '\0') playfairDecrypt(text[i], 'X', key);  
         else {  
-            if (str[i + 1] == 'J') str[i + 1] = 'I';  
-            if (str[i] == str[i + 1]) playfairDecript(str[i], 'X', key);  
+            if (text[i + 1] == 'J') text[i + 1] = 'I';  
+            if (text[i] == text[i + 1]) playfairDecrypt(text[i], 'X', key);  
             else {  
-                playfairDecript(str[i], str[i + 1], key);  
+                playfairDecrypt(text[i], text[i + 1], key);  
                 i++;  
             }  
         }  
